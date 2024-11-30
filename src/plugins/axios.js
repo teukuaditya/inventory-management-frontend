@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from '@/store/authStore'
 
 let apiClient = axios.create({
-    baseURL: 'FRONTEND_URL',
+    baseURL:  import.meta.env.FRONTEND_URL,
     headers: {
         'Content-Type': 'application/json',
     }
