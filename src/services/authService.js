@@ -3,7 +3,7 @@ import { useAuthStore } from '@/store/authStore'
 
 export let login = async (username, password) => {
     try {
-        let response = await apiClient.post('/auth/login', {
+        let response = await apiClient.post('FRONTEND_URL/auth/login', {
             username,
             password,
         })
@@ -57,7 +57,7 @@ export let login = async (username, password) => {
 
 export let register = async (username, email, password) => {
     try {
-        let response = await apiClient.post('/auth/register', {
+        let response = await apiClient.post('FRONTEND_URL/auth/register', {
             username,
             email,
             password,

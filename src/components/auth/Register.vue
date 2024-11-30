@@ -87,32 +87,59 @@ export default {
     },
     methods: {
         async register() {
+            // Log data sebelum melakukan registrasi
+            console.log('Registering with data:', {
+                username: this.username,
+                email: this.email,
+                password: this.password,
+                confirmPassword: this.confirmPassword
+            });
+
+            // Validasi jika password dan konfirmasi password tidak cocok
             if (this.password !== this.confirmPassword) {
-                alert('Passwords do not match!')
-                return
+                alert('Passwords do not match!');
+                console.log('Passwords do not match!');
+                return;
             }
 
             try {
+                // Log request sebelum mengirim ke server
+                console.log('Sending registration request to server...');
+                
+                // Panggil service untuk register
                 let response = await registerService(
                     this.username,
                     this.email,
                     this.password
-                )
+                );
 
-                console.log('Registration successful:', response)
-                alert('Registration successful!')
+                // Log sukses dan beri notifikasi pengguna
+                console.log('Registration successful:', response);
+                alert('Registration successful!');
 
-                this.$emit('switch', 'login')
+                // Alihkan ke halaman login
+                this.$emit('switch', 'Login');
             } catch (error) {
+                // Tangani error yang berasal dari respons server
                 if (error.response) {
-                    this.error =
-                        error.response.data.message || 'Invalid request'
+                    const serverError = error.response.data.message || 'Invalid request';
+                    this.error = `Server Error: ${serverError}`;
+                    console.error('Server Error:', this.error);
+                } else if (error.request) {
+                    // Tangani error yang disebabkan oleh kegagalan network
+                    this.error = 'Network Error: Failed to communicate with the server';
+                    console.error('Network Error:', this.error);
                 } else {
-                    this.error = error.message || 'An unexpected error occurred'
+                    // Tangani error lainnya (kode frontend, dll.)
+                    this.error = `Unexpected Error: ${error.message}`;
+                    console.error('Unexpected Error:', this.error);
                 }
 
-                console.error('Registration failed:', this.error)
-                alert('Registration failed!')
+                // Log error untuk debugging
+                console.error('Registration failed:', this.error);
+
+                // Tampilkan notifikasi gagal kepada pengguna
+                alert(this.error);
             }
         }
     }
