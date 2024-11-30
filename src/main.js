@@ -10,11 +10,9 @@ import piniaPersistedstate from 'pinia-plugin-persistedstate'
 
 let pinia = createPinia()
 
-// Gunakan middleware custom Anda
 
 pinia.use(createPiniaMiddleware())
 
-// Gunakan plugin persisted state dari 'pinia-plugin-persistedstate'
 
 pinia.use(piniaPersistedstate)
 

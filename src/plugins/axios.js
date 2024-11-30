@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useAuthStore } from '@/store/authStore'
 
 let apiClient = axios.create({
-    baseURL: 'https://inventory-management-backend-5kqd0wjad-teukuadityas-projects.vercel.app/',
+    baseURL: 'VITE_API_URL',
     headers: {
         'Content-Type': 'application/json',
     }
