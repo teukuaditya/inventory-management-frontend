@@ -3,7 +3,7 @@ import { useAuthStore } from '@/store/authStore'
 
 export let login = async (username, password) => {
     try {
-        let response = await apiClient.post('https://inventory-management-backend-5kqd0wjad-teukuadityas-projects.vercel.app/auth/login', {
+        let response = await apiClient.post('https://inventory-management-backend-eosin.vercel.app/api', {
             username,
             password,
         })
